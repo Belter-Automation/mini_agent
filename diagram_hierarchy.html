@@ -5,45 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagram Hierarchy Map</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; color: #111; background: #f9f9fb; }
-    h1 { margin-bottom: 0.25rem; }
-    p { max-width: 780px; line-height: 1.6; }
-    .tree { margin-top: 1.5rem; }
-    .node { margin-left: 1rem; padding: 0.25rem 0; }
-    .node a { color: #0451a5; text-decoration: none; font-weight: 600; }
-    .node a:hover { text-decoration: underline; }
-    .description { color: #333; margin: 0.15rem 0 0.8rem 0; }
-    .child-list { margin: 0.5rem 0 0 1.5rem; }
-    details { margin-top: 0.5rem; }
-    summary { cursor: pointer; font-weight: 700; color: #0451a5; outline: none; }
-    summary::-webkit-details-marker { display: none; }
-    details summary::before { content: "▶ "; display: inline-block; transform: rotate(0deg); transition: transform 0.2s ease; }
-    details[open] summary::before { transform: rotate(90deg); }
-    details > ul { margin: 0.5rem 0 0 1.5rem; padding-left: 0; }
-    .footer { margin-top: 2rem; font-size: 0.95rem; color: #555; }
+    body { font-family: Arial, sans-serif; margin: 0; color: #111; background: #f4f7fb; }
+    .container { display: flex; min-height: 100vh; }
+    .sidebar { width: 320px; background: #fff; border-right: 1px solid #d2d6dc; padding: 2rem 1.5rem; box-shadow: 2px 0 12px rgba(15, 23, 42, 0.05); }
+    .sidebar h1 { margin-top: 0; font-size: 1.4rem; }
+    .sidebar p { color: #475569; line-height: 1.6; margin-bottom: 1.5rem; }
+    .sidebar ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar li { margin-bottom: 1rem; }
+    .sidebar a { display: inline-block; color: #0f172a; text-decoration: none; font-weight: 600; }
+    .sidebar a:hover { color: #1d4ed8; }
+    .sidebar details summary { cursor: pointer; display: flex; align-items: center; gap: 0.35rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+    .sidebar details summary::-webkit-details-marker { display: none; }
+    .sidebar details[open] > summary::before { content: '−'; }
+    .sidebar details > summary::before { content: '+'; display: inline-block; width: 1.1rem; text-align: center; color: #0f172a; }
+    .sidebar details ul { margin: 0.5rem 0 0 1.4rem; padding: 0; }
+    .sidebar details li { margin-bottom: 0.6rem; }
+    .main { flex: 1; padding: 2rem; }
+    .main h2 { margin-top: 0; font-size: 1.3rem; }
+    .main p { color: #334155; line-height: 1.7; max-width: 760px; }
+    .footer { margin-top: 2rem; font-size: 0.95rem; color: #64748b; }
   </style>
 </head>
 <body>
-  <h1>Diagram Hierarchy Map</h1>
-  <p>This page shows the clickable hierarchy of diagrams for the Mini Coding Agent project. Use it to navigate from higher-level architecture explanations to deeper implementation details.</p>
+  <div class="container">
+    <aside class="sidebar">
+      <h1>Diagram hierarchy</h1>
+      <p>Navigate project diagrams using the left menu. Expand items to reveal deeper detail levels.</p>
+      <ul>
+        <li>
+          <a href="info_flow_enter_to_first_response.html">Info flow: enter to first response</a>
+          <details open>
+            <summary>Shell launches Python process</summary>
+            <ul>
+              <li><a href="shell_parses_command_line.html">Shell parses command line</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </aside>
 
-  <div class="tree">
-    <div class="node">
-      <a href="info_flow_enter_to_first_response.html">Info flow: enter to first response</a>
-      <p class="description">High-level flow from starting the agent to the first model response.</p>
-      <div class="child-list">
-        <details open>
-          <summary><a href="shell_launches_python_process.html">Shell launches Python process</a></summary>
-          <ul>
-            <li><a href="shell_parses_command_line.html">Shell parses command line</a></li>
-          </ul>
-        </details>
+    <main class="main">
+      <h2>Diagram Hierarchy Map</h2>
+      <p>Use this navigation sidebar to jump between diagram pages that explain the Mini Coding Agent workflow at different levels of detail.</p>
+      <div class="footer">
+        <p>Each diagram page contains navigation back to this map. Add new diagrams by updating the links in the sidebar and relating them to their parent diagram.</p>
       </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <p>Each diagram file includes navigation links back to this map and links to related diagrams. Add new diagrams by updating this file and linking the new file from an existing parent.</p>
+    </main>
   </div>
 </body>
 </html>
