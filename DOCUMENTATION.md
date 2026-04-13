@@ -260,6 +260,10 @@ The package is configured in `pyproject.toml` with `setuptools` backend and expo
 
 This repository is licensed under the Apache License 2.0.
 
+## Diagram hierarchy
+
+A clickable diagram map is available in `diagram_hierarchy.html`. Use it to navigate from the top-level project flow to deeper explanatory diagrams, such as the shell-to-Python startup flow.
+
 ## Notes
 
 - Running the agent directly is supported with `python mini_coding_agent.py`.

@@ -1,3 +1,11 @@
+# Info flow: enter to first response
+
+[Back to diagram map](diagram_hierarchy.html)
+
+**Parent diagram:** none
+
+**Child diagrams:** [Shell launches Python process](shell_launches_python_process.md)
+
 ```mermaid
 graph TD;
     A["User presses Enter on command line to start agent"];

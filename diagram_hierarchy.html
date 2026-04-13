@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagram Hierarchy Map</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; color: #111; background: #f9f9fb; }
+    h1 { margin-bottom: 0.25rem; }
+    p { max-width: 780px; line-height: 1.6; }
+    .tree { margin-top: 1.5rem; }
+    .node { margin-left: 1rem; padding: 0.25rem 0; }
+    .node a { color: #0451a5; text-decoration: none; font-weight: 600; }
+    .node a:hover { text-decoration: underline; }
+    .description { color: #333; margin: 0.15rem 0 0.8rem 0; }
+    .child-list { margin: 0.5rem 0 0 1.5rem; }
+    .footer { margin-top: 2rem; font-size: 0.95rem; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Diagram Hierarchy Map</h1>
+  <p>This page shows the clickable hierarchy of diagrams for the Mini Coding Agent project. Use it to navigate from higher-level architecture explanations to deeper implementation details.</p>
+
+  <div class="tree">
+    <div class="node">
+      <a href="info_flow_enter_to_first_response.md">Info flow: enter to first response</a>
+      <p class="description">High-level flow from starting the agent to the first model response.</p>
+      <div class="child-list">
+        <strong>Child diagrams:</strong>
+        <ul>
+          <li><a href="shell_launches_python_process.md">Shell launches Python process</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Each diagram file includes navigation links back to this map and links to related diagrams. Add new diagrams by updating this file and linking the new file from an existing parent.</p>
+  </div>
+</body>
+</html>
