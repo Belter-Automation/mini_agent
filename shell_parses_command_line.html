@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shell launches Python process</title>
+  <title>Shell parses command line</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 2rem; background: #f6f8fa; color: #111; }
     h1 { margin-bottom: 0.5rem; }
@@ -20,43 +20,35 @@
   </script>
 </head>
 <body>
-  <h1>Shell launches Python process</h1>
+  <h1>Shell parses command line</h1>
   <div class="meta">
-    <p>This page explains the shell-side actions involved before the Python runtime starts executing the agent script.</p>
+    <p>This diagram breaks down the shell's command-line parsing steps in detail before launching the resolved executable.</p>
   </div>
   <div class="links">
     <a href="diagram_hierarchy.html">Back to diagram map</a>
-    <a href="info_flow_enter_to_first_response.html">Parent diagram: Info flow</a>
-    <a href="shell_parses_command_line.html">Child diagram: Shell parses command line</a>
+    <a href="shell_launches_python_process.html">Parent diagram: Shell launches Python process</a>
   </div>
   <div class="diagram">
     <div class="mermaid">
 graph TD;
-    A["User types command and presses Enter in shell"];
-    B["Shell parses command line"];
-    C["Shell resolves executable path"];
-    click B "shell_parses_command_line.html" "Open parsing detail";
-    classDef clickable fill:#f5f8ff,stroke:#0366d6,stroke-width:2px,color:#0366d6;
-    class B clickable;
-    D["Shell locates Python interpreter"];
-    E["Shell spawns new Python process"];
-    F["Python runtime initializes"];
-    G["Python loads interpreter executable"];
-    H["Python initializes memory and runtime state"];
-    I["Python parses sys.argv and imports modules"];
-    J["Python executes script entrypoint"];
-    K["mini_coding_agent.py main() begins"];
+    A["Shell receives raw command line input"];
+    B["Tokenize input into words and operators"];
+    C["Handle quoting and escaping"];
+    D["Expand variables and command substitutions"];
+    E["Perform pathname expansion (globs)"];
+    F["Detect redirection, pipelines, and special syntax"];
+    G["Resolve command name and search PATH"];
+    H["Build argv array and execution environment"];
+    I["Pass parsed command to process launcher"];
+
     A --> B;
     B --> C;
     C --> D;
     D --> E;
     E --> F;
     F --> G;
-    F --> H;
-    G --> I;
+    G --> H;
     H --> I;
-    I --> J;
-    J --> K;
     </div>
   </div>
 </body>

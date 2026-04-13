@@ -4,7 +4,7 @@
 
 **Parent diagram:** [Info flow: enter to first response](info_flow_enter_to_first_response.md)
 
-**Child diagrams:** none
+**Child diagrams:** [Shell parses command line](shell_parses_command_line.md)
 
 ```mermaid
 graph TD;
