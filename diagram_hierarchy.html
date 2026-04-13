@@ -14,6 +14,12 @@
     .node a:hover { text-decoration: underline; }
     .description { color: #333; margin: 0.15rem 0 0.8rem 0; }
     .child-list { margin: 0.5rem 0 0 1.5rem; }
+    details { margin-top: 0.5rem; }
+    summary { cursor: pointer; font-weight: 700; color: #0451a5; outline: none; }
+    summary::-webkit-details-marker { display: none; }
+    details summary::before { content: "▶ "; display: inline-block; transform: rotate(0deg); transition: transform 0.2s ease; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details > ul { margin: 0.5rem 0 0 1.5rem; padding-left: 0; }
     .footer { margin-top: 2rem; font-size: 0.95rem; color: #555; }
   </style>
 </head>
@@ -26,18 +32,12 @@
       <a href="info_flow_enter_to_first_response.html">Info flow: enter to first response</a>
       <p class="description">High-level flow from starting the agent to the first model response.</p>
       <div class="child-list">
-        <strong>Child diagrams:</strong>
-        <ul>
-          <li>
-            <a href="shell_launches_python_process.html">Shell launches Python process</a>
-            <div class="child-list">
-              <strong>Drill down:</strong>
-              <ul>
-                <li><a href="shell_parses_command_line.html">Shell parses command line</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+        <details open>
+          <summary><a href="shell_launches_python_process.html">Shell launches Python process</a></summary>
+          <ul>
+            <li><a href="shell_parses_command_line.html">Shell parses command line</a></li>
+          </ul>
+        </details>
       </div>
     </div>
   </div>
