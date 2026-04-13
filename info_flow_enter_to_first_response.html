@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Info flow: enter to first response</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f6f8fa; color: #111; }
+    h1 { margin-bottom: 0.5rem; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .meta { margin-bottom: 1.5rem; }
+    .diagram { background: #fff; padding: 1.25rem; border: 1px solid #d0d7de; border-radius: 12px; box-shadow: 0 1px 2px rgba(27,31,35,.075); }
+    .links { margin-top: 1rem; }
+    .links a { display: inline-block; margin-right: 1rem; }
+  </style>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', fontFamily: 'Arial' });
+  </script>
+</head>
+<body>
+  <h1>Info flow: enter to first response</h1>
+  <div class="meta">
+    <p>This page shows the high-level flow from starting the agent to receiving the first response.</p>
+    <p>Use the diagram map to navigate to deeper details.</p>
+  </div>
+  <div class="links">
+    <a href="diagram_hierarchy.html">Back to diagram map</a>
+    <a href="shell_launches_python_process.html">Child diagram: Shell launches Python process</a>
+  </div>
+  <div class="diagram">
+    <div class="mermaid">
+graph TD;
+    A["User presses Enter on command line to start agent"];
+    B["Shell launches Python process"];
+    C["Python imports mini_coding_agent.py"];
+    D["main() executes"];
+    E["build_arg_parser() creates CLI parser"];
+    F["parse command line arguments"];
+    G["build_agent(args)"];
+    G1["WorkspaceContext.build(args.cwd)"];
+    G1a["Resolve cwd and repo root"];
+    G1b["Run git commands for branch/default/status/commits"];
+    G1c["Read project docs (README.md, pyproject.toml, AGENTS.md, package.json)"];
+    G2["Create SessionStore at repo_root/.mini-coding-agent/sessions"];
+    G3["Create OllamaModelClient"];
+    G3a["Set model, host, temperature, top_p, timeout"];
+    G4["Create MiniAgent instance"];
+    G4a["Initialize session metadata and memory"];
+    G4b["build_tools() defines structured tools"];
+    G4c["build_prefix() builds static prompt prefix"];
+    G4d["Save initial session JSON"];
+    H["build_welcome(agent, model, host)"];
+    I["Print welcome banner to terminal"];
+    J{"args.prompt provided?"};
+    K["agent.ask(prompt)"];
+    L["Enter REPL loop and wait for user input"];
+    M["User enters first prompt"];
+    N{"Is slash command?"};
+    O["Handle slash command locally (/help, /memory, /session, /reset, /exit)"];
+    K1["agent.ask(user_message)"];
+    K2["Set task memory if empty"];
+    K3["Record user message to session history"];
+    K4["Build prompt text"];
+    K4a["Prefix + memory_text + history_text + current request"];
+    K5["model_client.complete(prompt, max_new_tokens)"];
+    K6["Parse model output"];
+    K7{"Response type"};
+    K7a["Record assistant final answer and return it"];
+    K8["validate_tool(name,args)"];
+    K9{"Valid?"};
+    K9a["Return error and retry notice"];
+    K9 -- Yes --> K10;
+    K9 -- No --> K9a;
+    K10{"Tool risky?"};
+    K10a["approve(name,args) if approval policy is ask/auto/never"];
+    K10 --> K11["Run tool implementation"];
+    K11 --> K12["Record tool event to history"];
+    K12 --> K13["note_tool(name,args,result)"];
+    K13 --> K14["Loop for next model response"];
+    K7 -- final --> K7a;
+    K7 -- tool --> K8;
+    K7 -- retry --> K15["Record retry notice and loop"];
+    K7a --> P["CLI prints first response"];
+    K11 --> K14;
+    K15 --> K4;
+    A --> B;
+    B --> C;
+    C --> D;
+    D --> E;
+    E --> F;
+    F --> G;
+    G --> G1;
+    G1 --> G1a;
+    G1 --> G1b;
+    G1 --> G1c;
+    G --> G2;
+    G --> G3;
+    G3 --> G3a;
+    G --> G4;
+    G4 --> G4a;
+    G4 --> G4b;
+    G4 --> G4c;
+    G4 --> G4d;
+    D --> H;
+    H --> I;
+    F --> J;
+    J -- Yes --> K;
+    J -- No --> L;
+    L --> M;
+    M --> N;
+    N -- Yes --> O;
+    N -- No --> K;
+    K --> K1;
+    K1 --> K2;
+    K2 --> K3;
+    K3 --> K4;
+    K4 --> K4a;
+    K4 --> K5;
+    K5 --> K6;
+    K6 --> K7;
+    K15 --> K4;
+    K7a --> P;
+    K11 --> K14;
+    K10 --> K11;
+    K8 --> K9;
+    K9 -- Yes --> K10;
+    K9 -- No --> K9a;
+    K10 -- Yes --> K10a;
+    K10 -- No --> K11;
+    K15 --> K4;
+    
+    </div>
+  </div>
+</body>
+</html>

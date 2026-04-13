@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shell launches Python process</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; background: #f6f8fa; color: #111; }
+    h1 { margin-bottom: 0.5rem; }
+    a { color: #0366d6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .meta { margin-bottom: 1.5rem; }
+    .diagram { background: #fff; padding: 1.25rem; border: 1px solid #d0d7de; border-radius: 12px; box-shadow: 0 1px 2px rgba(27,31,35,.075); }
+    .links { margin-top: 1rem; }
+    .links a { display: inline-block; margin-right: 1rem; }
+  </style>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'base', fontFamily: 'Arial' });
+  </script>
+</head>
+<body>
+  <h1>Shell launches Python process</h1>
+  <div class="meta">
+    <p>This page explains the shell-side actions involved before the Python runtime starts executing the agent script.</p>
+  </div>
+  <div class="links">
+    <a href="diagram_hierarchy.html">Back to diagram map</a>
+    <a href="info_flow_enter_to_first_response.html">Parent diagram: Info flow</a>
+  </div>
+  <div class="diagram">
+    <div class="mermaid">
+graph TD;
+    A["User types command and presses Enter in shell"];
+    B["Shell parses command line"];
+    C["Shell resolves executable path"];
+    D["Shell locates Python interpreter"];
+    E["Shell spawns new Python process"];
+    F["Python runtime initializes"];
+    G["Python loads interpreter executable"];
+    H["Python initializes memory and runtime state"];
+    I["Python parses sys.argv and imports modules"];
+    J["Python executes script entrypoint"];
+    K["mini_coding_agent.py main() begins"];
+    A --> B;
+    B --> C;
+    C --> D;
+    D --> E;
+    E --> F;
+    F --> G;
+    F --> H;
+    G --> I;
+    H --> I;
+    I --> J;
+    J --> K;
+    </div>
+  </div>
+</body>
+</html>
