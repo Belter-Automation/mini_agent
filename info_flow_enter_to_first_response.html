@@ -5,14 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Info flow: enter to first response</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; background: #f6f8fa; color: #111; }
-    h1 { margin-bottom: 0.5rem; }
-    a { color: #0366d6; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .meta { margin-bottom: 1.5rem; }
+    body { font-family: Arial, sans-serif; margin: 0; color: #111; background: #f4f7fb; }
+    .container { display: flex; min-height: 100vh; }
+    .sidebar { width: 320px; background: #fff; border-right: 1px solid #d2d6dc; padding: 2rem 1.5rem; box-shadow: 2px 0 12px rgba(15, 23, 42, 0.05); }
+    .sidebar h1 { margin-top: 0; font-size: 1.4rem; }
+    .sidebar p { color: #475569; line-height: 1.6; margin-bottom: 1.5rem; }
+    .sidebar ul { list-style: none; padding: 0; margin: 0; }
+    .sidebar li { margin-bottom: 1rem; }
+    .sidebar a { display: inline-block; color: #0f172a; text-decoration: none; font-weight: 600; }
+    .sidebar a:hover { color: #1d4ed8; }
+    .sidebar a.active { color: #1d4ed8; }
+    .sidebar details summary { cursor: pointer; display: flex; align-items: center; gap: 0.35rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; }
+    .sidebar details summary::-webkit-details-marker { display: none; }
+    .sidebar details[open] > summary::before { content: '−'; }
+    .sidebar details > summary::before { content: '+'; display: inline-block; width: 1.1rem; text-align: center; color: #0f172a; }
+    .sidebar details ul { margin: 0.5rem 0 0 1.4rem; padding: 0; }
+    .sidebar details li { margin-bottom: 0.6rem; }
+    .main { flex: 1; padding: 2rem; }
+    .main h2 { margin-top: 0; font-size: 1.6rem; }
+    .meta p { color: #334155; line-height: 1.7; margin: 0.9rem 0; }
     .diagram { background: #fff; padding: 1.25rem; border: 1px solid #d0d7de; border-radius: 12px; box-shadow: 0 1px 2px rgba(27,31,35,.075); }
-    .links { margin-top: 1rem; }
-    .links a { display: inline-block; margin-right: 1rem; }
+    .links { margin: 1.25rem 0; }
+    .links a { display: inline-block; margin-right: 1rem; color: #0451a5; text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+    .footer { margin-top: 2rem; font-size: 0.95rem; color: #64748b; }
   </style>
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
@@ -20,8 +36,26 @@
   </script>
 </head>
 <body>
-  <h1>Info flow: enter to first response</h1>
-  <div class="meta">
+  <div class="container">
+    <aside class="sidebar">
+      <h1>Diagram hierarchy</h1>
+      <p>Navigate the diagram pages using the left menu.</p>
+      <ul>
+        <li>
+          <a href="info_flow_enter_to_first_response.html">Info flow: enter to first response</a>
+          <details open>
+            <summary><a href="shell_launches_python_process.html">Shell launches Python process</a></summary>
+            <ul>
+              <li><a href="shell_parses_command_line.html">Shell parses command line</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="main">
+      <h2>Info flow: enter to first response</h2>
+      <div class="meta">
     <p>This page shows the high-level flow from starting the agent to receiving the first response.</p>
     <p>Use the diagram map to navigate to deeper details.</p>
   </div>
@@ -135,6 +169,8 @@ graph TD;
     K15 --> K4;
     
     </div>
+    </main>
   </div>
+  <script type="module" src="diagram_nav.js"></script>
 </body>
 </html>
