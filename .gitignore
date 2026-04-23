@@ -29,7 +29,6 @@ htmlcov/
 *~
 
 # Local scratch space
-tmp/
 
 # OS files
 .DS_Store
